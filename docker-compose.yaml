@@ -1,0 +1,24 @@
+services:
+  plena_finance_backend:
+    image: lms_digiaccel
+    container_name: learning_management_system-backend
+    restart: unless-stopped
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+      - "9229:9229"
+    volumes:
+      - ./user:/app
+    depends_on:
+      - mongodb
+    networks:
+      - app_network
+
+volumes:
+  digiaccel-backend:
+  mongo_db:
+  
+networks:
+  app_network:
+    driver: bridge

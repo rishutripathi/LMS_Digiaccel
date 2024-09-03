@@ -43,7 +43,13 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+
+# inside docker
+$ docker-compose --env-file src/.env up -d
+$ exposed port: 8000
+
 ```
+
 
 ## Test
 
@@ -56,6 +62,12 @@ $ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
+```
+
+## Documentation
+
+```bash
+$ Endpoint: /api
 ```
 
 ## License
