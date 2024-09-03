@@ -1,5 +1,5 @@
 services:
-  plena_finance_backend:
+  LMS_backend:
     image: lms_digiaccel
     container_name: learning_management_system-backend
     restart: unless-stopped
@@ -12,6 +12,19 @@ services:
       - ./user:/app
     depends_on:
       - mongodb
+    networks:
+      - app_network
+
+  mongodb:
+    container_name: lms_digiaccel-mongodb
+    image: mongo:latest
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_DB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_DB_ROOT_PASSWORD}
+    ports:
+      - "8001:27017"
+    volumes:
+      - mongo_db:/data
     networks:
       - app_network
 
