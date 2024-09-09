@@ -93,7 +93,6 @@ export class TestService {
         if (!currentQuestionAnswer) {
           throw 'Sorry! No more questions.';
         }
-        console.log("current difficulty is::", currentDifficulty);
         this.storageService.setItem('currentDifficulty,', currentDifficulty);
         this.storageService.setItem(
           `difficultyLevel-,${currentDifficulty}`,
@@ -103,8 +102,6 @@ export class TestService {
         this.storageService.setItem('answer', currentQuestionAnswer.answer);
       } else {
         // questions onwards
-        console.log(":::---->>>>>>>>>>", this.storageService.getItem(`difficultyLevel-${currentDifficulty}`));
-        console.log(":::---->>>>>>>>>>", this.storageService.getItem(`currentDifficulty`));
         await this.testRepository.updateQuestion_AnswerByTestId(
           test_id,
           questionId,
@@ -195,7 +192,6 @@ export class TestService {
         question: currentQuestionAnswer.question,
       };
     } catch (error) {
-      console.error(error);
       throw new HttpException(
         error.message || error,
         error.status || HttpStatus.BAD_REQUEST,
