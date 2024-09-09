@@ -64,22 +64,20 @@ export class TestService {
     questionId: string,
     answerByUser: string,
   ): Promise<any> {
-    //{id: string, question: string}> {
     try {
       let currentQuestionAnswer: {
         _id: string;
         question: string;
         answer: string;
       };
-      let currentDifficulty = 5,
-        questionsAttempted = 0,
-        consecutiveCorrectAtMaxDifficulty = 0,
-        score = 0,
+      let currentDifficulty:number = 5,
+        questionsAttempted:number = 0,
+        consecutiveCorrectAtMaxDifficulty:number = 0,
+        score:number = 0,
         isAnswerCorrect: boolean;
-      if (questionId === '0') {
-        // very first question -> question id is 0
+      if (questionId === '0') {   // very first question -> question id is 0
         const testLastStatus =
-          await this.testRepository.findOneByTestId(test_id);
+          await this.testRepository.findOneByTestId(test_id); // test last status
         if (!testLastStatus) {
           throw new NotFoundException('Test not found');
         } else if (!testLastStatus.startedAt) {
@@ -91,10 +89,11 @@ export class TestService {
           currentDifficulty,
           this.storageService.getItem(`difficultyLevel-${currentDifficulty}`),
           consecutiveCorrectAtMaxDifficulty,
-        );
+        );                                                 // putting question to user
         if (!currentQuestionAnswer) {
           throw 'Sorry! No more questions.';
         }
+        console.log("current difficulty is::", currentDifficulty);
         this.storageService.setItem('currentDifficulty,', currentDifficulty);
         this.storageService.setItem(
           `difficultyLevel-,${currentDifficulty}`,
@@ -104,6 +103,8 @@ export class TestService {
         this.storageService.setItem('answer', currentQuestionAnswer.answer);
       } else {
         // questions onwards
+        console.log(":::---->>>>>>>>>>", this.storageService.getItem(`difficultyLevel-${currentDifficulty}`));
+        console.log(":::---->>>>>>>>>>", this.storageService.getItem(`currentDifficulty`));
         await this.testRepository.updateQuestion_AnswerByTestId(
           test_id,
           questionId,
@@ -194,6 +195,7 @@ export class TestService {
         question: currentQuestionAnswer.question,
       };
     } catch (error) {
+      console.error(error);
       throw new HttpException(
         error.message || error,
         error.status || HttpStatus.BAD_REQUEST,

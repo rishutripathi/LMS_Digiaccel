@@ -1,11 +1,10 @@
 FROM node:latest
 WORKDIR /app
-COPY package.* /app/
+COPY package*.json ./
+RUN npm install
 RUN npm install -g @nestjs/cli
-RUN npm install -g npm@latest
-
 # absolute path
-COPY . /app/
+COPY . .
 
 EXPOSE 8000
 

@@ -4,12 +4,12 @@ services:
     container_name: learning_management_system-backend
     restart: unless-stopped
     build:
+      context: .
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
-      - "9229:9229"
     volumes:
-      - ./user:/app
+      - .:/app
     depends_on:
       - mongodb
     networks:
@@ -24,12 +24,11 @@ services:
     ports:
       - "8001:27017"
     volumes:
-      - mongo_db:/data
+      - mongo_db:/data/db
     networks:
       - app_network
 
 volumes:
-  digiaccel-backend:
   mongo_db:
   
 networks:

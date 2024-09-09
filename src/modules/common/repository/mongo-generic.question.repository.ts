@@ -30,7 +30,7 @@ export class Mongo_BaseQuestionRepository<T extends Document> {
   ): Promise<T | null> {
     let result: T = await this.model
       .findOne({ weightage })
-      .skip(attempted || questionsAskesOfThisWeightage)
+      .skip(attempted || questionsAskesOfThisWeightage || 0)
       .select('-weightage -createdAt -updatedAt')
       .exec();
     result = result.toObject();
