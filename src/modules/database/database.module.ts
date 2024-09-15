@@ -5,9 +5,7 @@ import mongoose from 'mongoose';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      envFilePath: 'src/.env',
-    }),
+    ConfigModule.forRoot(),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => {

@@ -1,3 +1,6 @@
 node_modules
-**/.env
+dist
+.env
+.git
 logs
+**/.DS_Store
