@@ -11,7 +11,9 @@ import * as path from 'path';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true
+    }),
     DatabaseModule,
     AuthModule,
     TestModule,

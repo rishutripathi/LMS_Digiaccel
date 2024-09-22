@@ -9,7 +9,8 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./src:/app/src
+      - .:/app
+      - /app/node_modules  # Prevents overwriting node_modules
     depends_on:
       - mongodb
     networks:
