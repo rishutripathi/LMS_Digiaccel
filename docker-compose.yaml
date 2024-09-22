@@ -11,7 +11,7 @@ services:
     depends_on:
       - lms_digiaccel
     networks:
-      - my_network
+      - app_network
 
   lms_backend:
     build:
