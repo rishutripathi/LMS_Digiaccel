@@ -2,6 +2,7 @@ services:
   nginx:
     image: nginx:latest
     container_name: nginx
+    restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
@@ -32,6 +33,7 @@ services:
 
   mongodb:
     container_name: lms_digiaccel-mongodb
+    restart: unless-stopped
     image: mongo:latest
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_DB_ROOT_USERNAME}
