@@ -58,12 +58,15 @@ export class AuthService {
     loginCreds: UserLoginDto,
   ): Promise<{ token: string } | never> {
     try {
+      console.log("login creds are....", loginCreds);
+
       const userData = await this.userRepository.findOneByUsernameOrEmail(
         loginCreds.user,
       );
       if (!userData) {
         throw 'You are not registered';
       }
+      console.log("::user data.....", userData);
       const isPasswordCorrect = await bcrypt.compare(
         loginCreds.password,
         userData.password,

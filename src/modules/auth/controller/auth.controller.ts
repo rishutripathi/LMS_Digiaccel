@@ -20,6 +20,7 @@ export class AuthController {
 
   @Post('login')
   async login(@Body() loginCreds: UserLoginDto): Promise<{ token: string }> {
+    console.log("getting here in auth-login");
     const token = await this.authService.successOrFailedLogin(loginCreds);
 
     return token;
